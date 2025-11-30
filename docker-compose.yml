@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: "postgres:15"
+    container_name: lakehouse-postgres
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app_password
+      POSTGRES_DB: app_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+
+  spark:
+    image: spark:python3
+    container_name: lakehouse-spark
+    environment:
+      - HOME=/tmp
+      - SPARK_HOME=/opt/spark
+      - PATH=/opt/spark/bin:$PATH
+    volumes:
+      - ./spark_jobs:/opt/spark-apps
+    depends_on:
+      - postgres
+    command: ["bash", "-c", "tail -f /dev/null"]
+

@@ -1,0 +1,12 @@
+# 環境変数（絶対に公開しない）
+.env
+
+# Postgres の永続データ
+data/postgres/
+
+# Python 関連
+__pycache__/
+*.pyc
+
+# .DS_Store とか（念のため）
+.DS_Store
