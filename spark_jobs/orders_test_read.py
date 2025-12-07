@@ -17,15 +17,21 @@ def main():
         spark.read
         .format("jdbc")
         .option("url", POSTGRES_URL)
-        .option("dbtable", "public.orders")
+        .option("dbtable", "raw.olist_orders")
         .option("user", POSTGRES_USER)
         .option("password", POSTGRES_PASSWORD)
         .option("driver", "org.postgresql.Driver")   # ★ これを追加！
         .load()
     )
 
-    print("=== orders テーブルの先頭5行 ===")
-    df.show(5)
+    print("=== スキーマ ===")
+    df.printSchema()
+
+    print("=== 先頭 5 行 ===")
+    df.show(5, truncate=False)
+
+    print("=== 件数カウント ===")
+    print(df.count())
 
     spark.stop()
 
