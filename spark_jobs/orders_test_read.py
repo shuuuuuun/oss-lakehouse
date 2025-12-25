@@ -20,7 +20,7 @@ def main():
         .option("dbtable", "raw.olist_orders")
         .option("user", POSTGRES_USER)
         .option("password", POSTGRES_PASSWORD)
-        .option("driver", "org.postgresql.Driver")   # ★ これを追加！
+        .option("driver", "org.postgresql.Driver")
         .load()
     )
 
